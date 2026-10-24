@@ -1,0 +1,16 @@
+# Here we will use first Cross join because we will be requiring all possible combinations then after
+# left join with subject_name and student_id becz we want to count the exam each student attended without loosing 
+# student-subject combination where no exam was attended
+
+
+
+Select 
+    s.student_id,
+    s.student_name,
+    sub.subject_name,
+    count(e.student_id) as attended_exams
+    from Students s Cross Join Subjects sub
+    Left Join Examinations e on s.student_id =e.student_id
+    and sub.subject_name = e.subject_name
+group by s.student_id, s.student_name, sub.subject_name
+order by s.student_id, s.student_name
